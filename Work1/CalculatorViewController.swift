@@ -14,9 +14,13 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet var numButtons: [UIButton]!
     
+    var storedNum: String?
+    var storedOp: String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberDisplayLabel.text = ""
+        numberDisplayLabel.text = "0"
         // Do any additional setup after loading the view.
     }
 
@@ -26,20 +30,40 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func numButtonPressed(_ sender: UIButton) {
-        let num = sender.tag
-        let lastNum = numberDisplayLabel.text ?? ""
+        let num: Int = sender.tag
+        var curNum = numberDisplayLabel.text ?? "0"
         //TODO: 첫 숫자가 0인 경우 처리 로직.
-        numberDisplayLabel.text = lastNum + String(num)
+        if curNum == "0" {
+            curNum = ""
+        }
+        
+        if let storedNum = storedNum, storedNum == curNum {
+            curNum = ""
+        }
+        
+        numberDisplayLabel.text = curNum + String(num)
         print("\(num) pressed")
     }
     
     @IBAction func opButtonPressed(_ sender: UIButton) {
         let op = sender.title(for: .normal)
-        print("\(op) pressed")
+//        print("\(op) pressed")
+        //사칙연산
+        let curNum = numberDisplayLabel.text ?? "0"
+        if let storedNum = storedNum, let storedOp = storedOp {
+            if storedOp == "+" {
+                numberDisplayLabel.text = String(Int(storedNum)! + Int(curNum)!)
+            }
+        }
+        
+        storedOp = op
+        storedNum = numberDisplayLabel.text
     }
     
     @IBAction func acButtonPressed(_ sender: UIButton) {
         numberDisplayLabel.text = "0"
+        storedNum = nil
+        storedOp = nil
         let ac = sender.title(for: .normal)
         print("\(ac) pressed")
     }
