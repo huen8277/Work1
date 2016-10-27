@@ -16,7 +16,7 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberDisplayLabel.text = "0"
+        numberDisplayLabel.text = ""
         // Do any additional setup after loading the view.
     }
 
@@ -38,6 +38,11 @@ class CalculatorViewController: UIViewController {
         print("\(op) pressed")
     }
     
+    @IBAction func acButtonPressed(_ sender: UIButton) {
+        numberDisplayLabel.text = "0"
+        let ac = sender.title(for: .normal)
+        print("\(ac) pressed")
+    }
     
     
 
