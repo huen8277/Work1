@@ -16,7 +16,6 @@ class CalculatorViewController: UIViewController {
     
     var storedNum: String?
     var storedOp: String?
-    var resultNum: String?
     
     
     override func viewDidLoad() {
@@ -30,84 +29,60 @@ class CalculatorViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func getDisplayedNumber() -> String {
+        return numberDisplayLabel.text ?? "0"
+    }
+    
     @IBAction func numButtonPressed(_ sender: UIButton) {
         let num: Int = sender.tag
-        var curNum = numberDisplayLabel.text ?? "0"
-        //TODO: 첫 숫자가 0인 경우 처리 로직.
+        var curNum = getDisplayedNumber()
+        //첫 숫자가 0인 경우 처리 로직.
         if curNum == "0" {
             curNum = ""
         }
-        
         if let storedNum = storedNum, storedNum == curNum {
             curNum = ""
         }
         
         numberDisplayLabel.text = curNum + String(num)
         print("\(num) pressed")
+        }
+    
+    func calculated() -> String {
+        let curNum = getDisplayedNumber()
+        var calNum = "0"
+        if let storedNum = storedNum, let storedOp = storedOp {
+            if storedOp == "+" {
+                calNum = String(Int(storedNum)! + Int(curNum)!)
+            }
+            else if storedOp == "-" {
+                calNum = String(Int(storedNum)! - Int(curNum)!)
+            }
+            else if storedOp == "*" {
+                calNum = String(Int(storedNum)! * Int(curNum)!)
+            }
+            else if storedOp == "/" {
+                calNum = String(Int(storedNum)! / Int(curNum)!)
+            }
+        }
+        return calNum
     }
     
     @IBAction func opButtonPressed(_ sender: UIButton) {
         let op = sender.title(for: .normal)
         print("\(op) pressed")
-        //더하기 연산
-        let curNum = numberDisplayLabel.text ?? "0"
-        if let storedNum = storedNum, let storedOp = storedOp {
-            if storedOp == "+" {
-                numberDisplayLabel.text = String(Int(storedNum)! + Int(curNum)!)
-            }
-        }
+        // 사칙연산
+        numberDisplayLabel.text = calculated()
         storedOp = op
         storedNum = numberDisplayLabel.text
     }
     
-    @IBAction func minusButtonPressed(_ sender: UIButton) {
-        let minus = sender.title(for: .normal)
-        print("\(minus)pressed")
-        //빼기 연산
-        let curNum = numberDisplayLabel.text ?? "0"
-        if let storedNum = storedNum, let storedOp = storedOp {
-            if storedOp == "-" {
-                numberDisplayLabel.text = String(Int(storedNum)! - Int(curNum)!)
-            }
-        }
-        storedOp = minus
-        storedNum = numberDisplayLabel.text
-    }
-    
-    @IBAction func multiButtonPressed(_ sender: UIButton) {
-        let multi = sender.title(for: .normal)
-        print ("\(multi)pressed")
-        //곱하기 연산
-        let curNum = numberDisplayLabel.text ?? "0"
-        if let storedNum = storedNum, let storedOp = storedOp {
-            if storedOp == "*" {
-                numberDisplayLabel.text = String(Int(storedNum)! * Int(curNum)!)
-            }
-        }
-        storedOp = multi
-        storedNum = numberDisplayLabel.text
-    }
-    
-    @IBAction func divButtonPressed(_ sender: UIButton) {
-        let div = sender.title(for: .normal)
-        print("\(div)pressed")
-        //나누기 연산
-        let curNum = numberDisplayLabel.text ?? "0"
-        if let storedNum = storedNum, let storedOp = storedOp {
-            if storedOp == "/" {
-                numberDisplayLabel.text = String(Int(storedNum)! / Int(curNum)!)
-
-                }
-            }
-        storedOp = div
-        storedNum = numberDisplayLabel.text
-    }
-    
     @IBAction func equalButtonPressed(_ sender: UIButton) {
-        numberDisplayLabel.text = resultNum
         let equal = sender.title(for: .normal)
         print("\(equal)pressed")
         //= 로직
+        numberDisplayLabel.text = calculated()
+        storedOp = nil
     }
     
     @IBAction func acButtonPressed(_ sender: UIButton) {

@@ -148,7 +148,7 @@
                                     <color key="titleShadowColor" red="0.44131451845169067" green="0.65360051393508911" blue="0.96429949998855591" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="minusButtonPressed:" destination="U3k-oz-QGs" eventType="touchUpInside" id="1wM-HX-A5d"/>
+                                    <action selector="opButtonPressed:" destination="U3k-oz-QGs" eventType="touchUpInside" id="1s4-ZR-xew"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IqB-ck-sRm">
@@ -174,7 +174,7 @@
                                     <color key="titleShadowColor" red="0.44131451849999997" green="0.65360051389999996" blue="0.96429949999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="multiButtonPressed:" destination="U3k-oz-QGs" eventType="touchUpInside" id="vJC-N5-OYN"/>
+                                    <action selector="opButtonPressed:" destination="U3k-oz-QGs" eventType="touchUpInside" id="3tF-gt-vlJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Elz-U0-pn4">
@@ -187,7 +187,7 @@
                                     <color key="titleShadowColor" red="0.44131451849999997" green="0.65360051389999996" blue="0.96429949999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="divButtonPressed:" destination="U3k-oz-QGs" eventType="touchUpInside" id="RDF-fu-6XJ"/>
+                                    <action selector="opButtonPressed:" destination="U3k-oz-QGs" eventType="touchUpInside" id="zZP-7p-bIF"/>
                                 </connections>
                             </button>
                         </subviews>
