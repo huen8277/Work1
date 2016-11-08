@@ -37,20 +37,22 @@ class CalculatorViewController: UIViewController {
         let num: Int = sender.tag
         var curNum = getDisplayedNumber()
         //첫 숫자가 0인 경우 처리 로직.
-        if curNum == "0" {
+        if curNum == "0"{
             curNum = ""
         }
         if let storedNum = storedNum, storedNum == curNum {
             curNum = ""
+            // 버그 해결 (with) 연산자 바로 다음 입력받은 num을 위해 curNum을 빈 스트링으로 바꾼다.
         }
         
         numberDisplayLabel.text = curNum + String(num)
         print("\(num) pressed")
         }
     
-    func calculated() -> String {
+    func calculate() -> String {
         let curNum = getDisplayedNumber()
-        var calNum = "0"
+        var calNum = curNum
+        
         if let storedNum = storedNum, let storedOp = storedOp {
             if storedOp == "+" {
                 calNum = String(Int(storedNum)! + Int(curNum)!)
@@ -68,11 +70,11 @@ class CalculatorViewController: UIViewController {
         return calNum
     }
     
-    @IBAction func opButtonPressed(_ sender: UIButton) {
+    @IBAction func opButtonPressed(_ sender: UIButton){
         let op = sender.title(for: .normal)
         print("\(op) pressed")
         // 사칙연산
-        numberDisplayLabel.text = calculated()
+        numberDisplayLabel.text = calculate()
         storedOp = op
         storedNum = numberDisplayLabel.text
     }
@@ -81,7 +83,7 @@ class CalculatorViewController: UIViewController {
         let equal = sender.title(for: .normal)
         print("\(equal)pressed")
         //= 로직
-        numberDisplayLabel.text = calculated()
+        numberDisplayLabel.text = calculate()
         storedOp = nil
     }
     
